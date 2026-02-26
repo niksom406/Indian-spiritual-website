@@ -4,11 +4,11 @@ import {
     useTransform,
     motion,
 } from "framer-motion";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, ReactNode } from "react";
 
 interface TimelineEntry {
     title: string;
-    content: React.ReactNode;
+    content: ReactNode;
 }
 
 export const Timeline = ({ data }: { data: TimelineEntry[] }) => {

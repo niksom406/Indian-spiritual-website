@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Music, Flower2, CircleStop } from 'lucide-react';
 
 const Petal = ({ delay, duration, left, scale, opacity }: { delay: number, duration: number, left: number, scale: number, opacity: number }) => (
