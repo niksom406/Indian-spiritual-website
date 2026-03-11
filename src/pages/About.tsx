@@ -4,97 +4,42 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Heart, Users, Target, Lightbulb } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
 
-function MissionVisionCard({ title, description, icon: Icon }: { title: string, description: string, icon: any }) {
+function MissionVisionCard({
+  title, description, icon: Icon, direction = 'left'
+}: { title: string, description: string, icon: any, direction?: 'left' | 'right' }) {
   const shouldReduceMotion = useReducedMotion();
-  const shouldAnimate = !shouldReduceMotion;
-
-  const containerVariants: any = {
-    rest: {
-      scale: 1,
-      y: 0,
-      filter: "blur(0px)",
-    },
-    hover: shouldAnimate ? {
-      scale: 1.02,
-      y: -4,
-      filter: "blur(0px)",
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 28,
-        mass: 0.6,
-      }
-    } : {},
-  };
-
-  const contentVariants: any = {
-    hidden: {
-      opacity: 0,
-      y: 20,
-      filter: "blur(4px)",
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      filter: "blur(0px)",
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 28,
-        mass: 0.6,
-        staggerChildren: 0.15,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants: any = {
-    hidden: {
-      opacity: 0,
-      y: 15,
-      scale: 0.95,
-      filter: "blur(2px)",
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      filter: "blur(0px)",
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 25,
-        mass: 0.5,
-      },
-    },
-  };
 
   return (
     <motion.div
-      initial="rest"
-      whileHover="hover"
-      variants={containerVariants}
-      className="bg-[#F7F2EB] rounded-[2rem] p-10 md:p-12 shadow-sm border border-saffron/5 h-full cursor-pointer relative overflow-hidden group"
+      initial={{ opacity: 0, x: direction === 'left' ? -60 : 60 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+      whileHover={!shouldReduceMotion ? { y: -6, transition: { type: 'spring', stiffness: 300, damping: 20 } } : {}}
+      className="relative rounded-3xl p-8 md:p-10 cursor-pointer overflow-hidden group
+        bg-white/5 backdrop-blur-sm border border-white/10
+        hover:border-saffron/40 transition-colors duration-500 shadow-xl"
     >
-      <motion.div
-        variants={contentVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-50px" }}
-        className="flex flex-col h-full relative z-10"
-      >
-        <motion.div variants={itemVariants} className="w-14 h-14 bg-[#F3E1D9] rounded-2xl flex items-center justify-center mb-8">
-          <Icon size={24} className="text-[#A53E2B]" />
-        </motion.div>
+      {/* Top accent line */}
+      <div className="absolute top-0 left-8 right-8 h-[2px] bg-gradient-to-r from-transparent via-saffron to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
 
-        <motion.h3 variants={itemVariants} className="font-heading text-[28px] font-bold text-espresso mb-5">
-          {title}
-        </motion.h3>
+      {/* Glow blob */}
+      <div className="absolute -top-10 -right-10 w-40 h-40 bg-saffron/10 rounded-full blur-3xl group-hover:bg-saffron/20 transition-colors duration-700 pointer-events-none" />
 
-        <motion.p variants={itemVariants} className="text-[#6D635B] text-base md:text-lg leading-[1.8]">
-          {description}
-        </motion.p>
-      </motion.div>
+      {/* Icon */}
+      <div className="w-14 h-14 bg-saffron/15 border border-saffron/30 rounded-2xl flex items-center justify-center mb-7 group-hover:bg-saffron/25 transition-colors duration-300">
+        <Icon size={26} className="text-saffron" />
+      </div>
+
+      <h3 className="font-heading text-2xl md:text-[28px] font-bold text-white mb-4">
+        {title}
+      </h3>
+
+      <div className="w-10 h-[2px] bg-saffron/50 mb-5 group-hover:w-20 transition-all duration-500" />
+
+      <p className="text-white/65 text-base md:text-lg leading-[1.85] group-hover:text-white/80 transition-colors duration-300">
+        {description}
+      </p>
     </motion.div>
   );
 }
@@ -144,9 +89,9 @@ export default function About() {
   }, []);
 
   const trustees = [
-    { name: 'Sunil Sudhamomal Somani', role: 'President', image: '/images/trustee1_new.jpg' },
-    { name: 'Radhika Sudhamomal Somani', role: 'Secretary', image: '/images/trustee2_new.png' },
-    { name: 'Sandeep Vazirani', role: 'Treasurer', image: '/images/trustee3.jpg' },
+    { name: 'Sunil Sudhamomal Somani', role: 'President', image: '/images/Trustee 1.png', objectPosition: 'center 35%' },
+    { name: 'Radhika Sudhamomal Somani', role: 'Secretary', image: '/images/Trustee 2.png', objectPosition: 'center 90%' },
+    { name: 'Sandeep Gopaldas Vazirani', role: 'Treasurer', image: '/images/Trustee 3.png', objectPosition: 'center 45%' },
   ];
 
   const values = [
@@ -195,13 +140,13 @@ export default function About() {
               </h2>
               <div className="space-y-4 text-taupe leading-relaxed">
                 <p>
-                  Shree Sai Ram Trust was established in 2009 with a simple yet profound vision: to create a sacred space where devotees could come together to pray, learn, and serve the community. Located on Jhulelal Mandir Road in Ulhasnagar, our temple has grown from a small prayer hall to a vibrant spiritual center.
+                  Shree Sai Ram Trust was established in 1993 by Sunil Sudhamomal Somani in loving memory of Late Shri Sudhamomal G. Somani. The trust was founded as a tribute to his life, values, and dedication to faith, kindness, and service to society.
                 </p>
                 <p>
-                  Over the past 15 years, we have been blessed to serve thousands of devotees who visit our temple daily. Our mission is guided by Sai Baba's teachings of "Sabka Malik Ek" (One God governs all) and his emphasis on selfless service to humanity.
+                  Inspired by the teachings of Shree Sai Baba, the trust works to promote spirituality, compassion, and support for the community. It aims to continue the noble ideals of Late Shri Sudhamomal G. Somani by encouraging devotion, unity, and charitable activities that benefit people from all walks of life.
                 </p>
                 <p>
-                  Through daily aartis, weekly satsangs, community meals, and charitable activities, we strive to create an environment where everyone feels welcome, regardless of their background or beliefs.
+                  Located in the city of Ulhasnagar, Shree Sai Ram Trust stands as a symbol of remembrance, faith, and service, keeping alive the legacy and values of Late Shri Sudhamomal G. Somani.
                 </p>
               </div>
             </div>
@@ -224,18 +169,49 @@ export default function About() {
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-20 md:py-28 bg-white">
-        <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12">
+      <section className="py-20 md:py-28 relative overflow-hidden bg-espresso">
+        {/* Decorative background glow */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-saffron/10 rounded-full blur-[100px]" />
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-saffron/8 rounded-full blur-[100px]" />
+          {/* Subtle dot grid */}
+          <div className="absolute inset-0 opacity-[0.04]"
+            style={{ backgroundImage: 'radial-gradient(circle, #DDAF54 1px, transparent 1px)', backgroundSize: '28px 28px' }}
+          />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
+          {/* Section heading */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.7, ease: 'easeOut' }}
+            className="text-center max-w-2xl mx-auto mb-14 md:mb-20"
+          >
+            <span className="inline-block px-4 py-1.5 bg-saffron/15 text-saffron rounded-full text-sm font-medium tracking-widest uppercase mb-5">
+              Our Purpose
+            </span>
+            <h2 className="font-heading text-3xl md:text-5xl font-bold text-white mb-4">
+              Mission &amp; <span className="text-gold">Vision</span>
+            </h2>
+            <p className="text-white/50 text-lg">
+              The guiding principles that shape every prayer, every act of service, and every step forward.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-6 md:gap-10">
             <MissionVisionCard
               title="Our Mission"
               description="To spread Sai Baba's message of love, compassion, and unity through spiritual practices, community service, and charitable activities. We aim to create a welcoming space where devotees can connect with the divine and serve humanity."
               icon={Target}
+              direction="left"
             />
             <MissionVisionCard
               title="Our Vision"
               description="To be a beacon of spiritual light in our community, inspiring individuals to lead lives of purpose, compassion, and devotion. We envision a world where the teachings of Sai Baba bring peace and harmony to all."
               icon={Lightbulb}
+              direction="right"
             />
           </div>
         </div>
@@ -297,10 +273,10 @@ export default function About() {
                     src={trustee.image}
                     alt={trustee.name}
                     className="w-full h-full object-cover rounded-full shadow-lg group-hover:shadow-xl transition-all duration-300"
+                    style={{ objectPosition: trustee.objectPosition ?? 'center top' }}
                   />
                 </div>
                 <h3 className="font-heading text-lg font-semibold text-espresso mb-1">{trustee.name}</h3>
-                <p className="text-saffron font-medium text-sm">{trustee.role}</p>
               </div>
             ))}
           </div>

@@ -107,20 +107,24 @@ export default function Programs() {
 
   return (
     <div ref={sectionRef} className="overflow-hidden">
-      {/* Page Header */}
-      <div className="relative py-20 md:py-28 bg-espresso">
-        <div className="absolute inset-0 opacity-20">
+      {/* Hero Section */}
+      <div className="relative h-[60vh] md:h-[80vh] w-full flex items-center justify-center overflow-hidden bg-espresso">
+        <div className="absolute inset-0">
           <img
             src="/images/programs_bowl.jpg"
-            alt="Background"
-            className="w-full h-full object-cover"
+            alt="Programs Background"
+            className="w-full h-[130%] object-cover object-center opacity-60"
           />
+          <div className="absolute inset-0 bg-gradient-to-b from-espresso/30 via-espresso/50 to-espresso/90" />
         </div>
-        <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 text-center">
-          <h1 className="animate-item font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+        <div className="relative z-10 text-center px-4 max-w-5xl mx-auto mt-8 md:mt-12">
+          <span className="animate-item inline-block px-4 py-1.5 bg-saffron/80 text-white backdrop-blur-sm rounded-full text-sm font-medium tracking-widest uppercase mb-6 shadow-xl">
+            Programs & Events
+          </span>
+          <h1 className="animate-item font-heading text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 drop-shadow-2xl">
             Programs & <span className="text-gold">Events</span>
           </h1>
-          <p className="animate-item text-white/70 text-lg max-w-2xl mx-auto">
+          <p className="animate-item text-white/90 text-xl md:text-2xl font-light max-w-2xl mx-auto drop-shadow-md">
             Discover our daily rituals, weekly gatherings, and special celebrations throughout the year
           </p>
         </div>

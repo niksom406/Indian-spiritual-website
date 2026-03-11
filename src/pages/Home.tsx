@@ -43,6 +43,38 @@ export default function Home() {
       end: 'bottom 15%',
     });
 
+    // About section directional animations
+    gsap.fromTo('.about-image',
+      { opacity: 0, x: -60 },
+      {
+        opacity: 1, x: 0, duration: 1, ease: 'power3.out',
+        scrollTrigger: { trigger: '.about-image', start: 'top 85%', toggleActions: 'play none none reverse' }
+      }
+    );
+    gsap.fromTo('.about-text',
+      { opacity: 0, x: 60 },
+      {
+        opacity: 1, x: 0, duration: 1, ease: 'power3.out',
+        scrollTrigger: { trigger: '.about-text', start: 'top 85%', toggleActions: 'play none none reverse' }
+      }
+    );
+
+    // Memorial section directional animations
+    gsap.fromTo('.memorial-portrait',
+      { opacity: 0, x: -60 },
+      {
+        opacity: 1, x: 0, duration: 1, ease: 'power3.out',
+        scrollTrigger: { trigger: '.memorial-portrait', start: 'top 85%', toggleActions: 'play none none reverse' }
+      }
+    );
+    gsap.fromTo('.memorial-text',
+      { opacity: 0, x: 60 },
+      {
+        opacity: 1, x: 0, duration: 1, ease: 'power3.out',
+        scrollTrigger: { trigger: '.memorial-text', start: 'top 85%', toggleActions: 'play none none reverse' }
+      }
+    );
+
     return () => {
       ScrollTrigger.getAll().forEach(st => st.kill());
     };
@@ -89,7 +121,7 @@ export default function Home() {
             </h1>
 
             <p className="text-white/80 text-lg md:text-xl leading-relaxed mb-8 max-w-xl">
-              A sacred space for prayer, community, and service. Join daily aarti, weekly satsangs, and celebrations that bring us together.
+              A sacred space born of love and remembrance, serving the community of Ulhasnagar since 1993. Join daily aarti, weekly satsangs, and celebrations that bring us together.
             </p>
 
             <div className="flex flex-wrap gap-4">
@@ -125,7 +157,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Image */}
-            <div className="animate-item relative">
+            <div className="about-image relative">
               <div
                 className="relative rounded-3xl overflow-hidden shadow-2xl cursor-pointer transform-style-3d"
                 onMouseMove={(e) => {
@@ -152,13 +184,13 @@ export default function Home() {
               </div>
               {/* Floating Card */}
               <div className="absolute -bottom-6 -right-6 md:bottom-8 md:-right-8 bg-white rounded-2xl shadow-xl p-6 max-w-[200px] z-10">
-                <div className="text-4xl font-bold text-saffron mb-1">15+</div>
-                <p className="text-taupe text-sm">Years of serving the community with devotion</p>
+                <div className="text-4xl font-bold text-saffron mb-1">Est. 1993</div>
+                <p className="text-taupe text-sm">A living tribute to Late Shri Sudhamomal G. Somani</p>
               </div>
             </div>
 
             {/* Content */}
-            <div className="animate-item">
+            <div className="about-text">
               <span className="inline-block px-4 py-1.5 bg-saffron/10 text-saffron rounded-full text-sm font-medium mb-4">
                 About Us
               </span>
@@ -166,10 +198,10 @@ export default function Home() {
                 Rooted in Faith, <span className="text-saffron">Open to All</span>
               </h2>
               <p className="text-taupe text-lg leading-relaxed mb-6">
-                Founded by devotees for devotees, Shree Sai Ram Trust has been a beacon of spiritual light on Jhulelal Mandir Road in Ulhasnagar. We preserve traditions while welcoming everyone—families, elders, youth, and seekers.
+                Established in 1993 by Sunil Sudhamomal Somani as a heartfelt tribute to his father, Shree Sai Ram Trust has grown into a living symbol of faith and remembrance right here in Ulhasnagar. Every prayer offered within these walls carries forward a legacy of kindness.
               </p>
               <p className="text-taupe/80 leading-relaxed mb-8">
-                Our temple is dedicated to Sai Baba's teachings of love, compassion, and service to humanity. Through daily prayers, community meals, and charitable activities, we strive to make a positive impact on society.
+                Guided by Sai Baba's timeless call to love and serve, the trust nurtures devotion, unity, and compassion, opening its doors to every soul, regardless of background, just as he once did.
               </p>
 
               <div className="grid grid-cols-2 gap-4 mb-8">
@@ -194,6 +226,57 @@ export default function Home() {
                 <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Memorial Tribute Section */}
+      <section className="py-16 md:py-20 bg-white">
+        <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
+          {/* Decorative divider */}
+          <div className="flex items-center justify-center gap-4 mb-10">
+            <div className="h-px w-16 bg-saffron/30" />
+            <span className="text-saffron/60 text-xl">✦</span>
+            <div className="h-px w-16 bg-saffron/30" />
+          </div>
+
+          <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16">
+            {/* Portrait */}
+            <div className="memorial-portrait flex-shrink-0 relative">
+              <div className="w-44 h-44 md:w-52 md:h-52 rounded-full overflow-hidden border-4 border-saffron/30 shadow-2xl ring-4 ring-gold/20">
+                <img
+                  src="/images/sudhamomal somani.jpg"
+                  alt="Late Shri Sudhamomal G. Somani"
+                  className="w-full h-full object-cover object-top"
+                />
+              </div>
+              {/* Decorative glow ring */}
+              <div className="absolute inset-0 rounded-full ring-8 ring-saffron/5 scale-110 pointer-events-none" />
+            </div>
+
+            {/* Text */}
+            <div className="memorial-text text-left">
+              <span className="inline-block px-4 py-1.5 bg-saffron/10 text-saffron rounded-full text-xs font-medium tracking-widest uppercase mb-4">
+                In Loving Memory
+              </span>
+              <h2 className="font-heading text-2xl md:text-3xl font-bold text-espresso mb-3">
+                Late Shri <span className="text-saffron">Sudhamomal G. Somani</span>
+              </h2>
+              <p className="text-taupe leading-relaxed mb-4">
+                A man of unwavering faith, quiet kindness, and selfless devotion to others. His life was a prayer — lived for family, community, and God.
+              </p>
+              <p className="text-taupe/70 text-sm leading-relaxed italic border-l-2 border-saffron/40 pl-4">
+                "This trust was built in his name, so that his spirit of service and love would continue to touch lives long after him."
+                <span className="block mt-1 not-italic text-taupe/50">— Sunil Sudhamomal Somani, Founder · Est. 1993</span>
+              </p>
+            </div>
+          </div>
+
+          {/* Bottom divider */}
+          <div className="flex items-center justify-center gap-4 mt-10">
+            <div className="h-px w-16 bg-saffron/30" />
+            <span className="text-saffron/60 text-xl">✦</span>
+            <div className="h-px w-16 bg-saffron/30" />
           </div>
         </div>
       </section>
